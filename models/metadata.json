@@ -1,0 +1,33 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "python_version": "3.12.10",
+  "sklearn_version": "1.7.2",
+  "training_timestamp": "2026-08-14T20:09:47.733643+00:00",
+  "random_seed": 0,
+  "test_size": 0.3,
+  "features": [
+    "Edad",
+    "Nivel_Educacional",
+    "Años_Trabajando",
+    "Ingresos",
+    "Deuda_Comercial",
+    "Deuda_Credito",
+    "Otras_Deudas"
+  ],
+  "numeric_features": [
+    "Edad",
+    "Años_Trabajando",
+    "Ingresos",
+    "Deuda_Comercial",
+    "Deuda_Credito",
+    "Otras_Deudas"
+  ],
+  "categorical_features": [
+    "Nivel_Educacional"
+  ],
+  "metrics": {
+    "accuracy": 0.7222,
+    "f1": 0.7906,
+    "roc_auc": 0.7772
+  }
+}
