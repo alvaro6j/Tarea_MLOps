@@ -10,7 +10,6 @@ from app.schemas import (
     PredictionResponse,
 )
 
-
 app = FastAPI(
     title="Default Prediction API",
     description="API para predicción de riesgo de Default de clientes.",

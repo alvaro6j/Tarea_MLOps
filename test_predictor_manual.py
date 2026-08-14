@@ -1,6 +1,5 @@
 from app.predictor import Predictor
 
-
 predictor = Predictor()
 
 sample = {

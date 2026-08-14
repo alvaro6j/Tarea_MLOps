@@ -1,18 +1,18 @@
-import joblib
 import json
 import platform
-import sklearn
 from datetime import datetime, timezone
 from pathlib import Path
 
+import joblib
 import pandas as pd
-from sklearn.model_selection import train_test_split
+import sklearn
 from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.impute import SimpleImputer
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
 # Configuración
 RANDOM_SEED = 0
