@@ -1,7 +1,7 @@
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
-addopts = "-q"
+addopts = "-q --cov=app --cov=training --cov-report=term-missing"
 
 [tool.ruff]
 target-version = "py312"
