@@ -113,9 +113,7 @@ preprocessor = ColumnTransformer(
     ]
 )
 
-model = HistGradientBoostingClassifier(
-    random_state=RANDOM_SEED
-)
+model = HistGradientBoostingClassifier(random_state=RANDOM_SEED)
 
 model_pipeline = Pipeline(
     steps=[

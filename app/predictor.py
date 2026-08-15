@@ -1,30 +1,26 @@
 import json
-from pathlib import Path
 
 import joblib
 import pandas as pd
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-MODEL_PATH = BASE_DIR / "models" / "model.joblib"
-METADATA_PATH = BASE_DIR / "models" / "metadata.json"
+from app.config import settings
 
 
 class Predictor:
     def __init__(self):
-        if not MODEL_PATH.exists():
+        if not settings.model_path.exists():
             raise FileNotFoundError(
-                f"No se encontró el modelo en: {MODEL_PATH}"
+                f"No se encontró el modelo en: {settings.model_path}"
             )
 
-        if not METADATA_PATH.exists():
+        if not settings.metadata_path.exists():
             raise FileNotFoundError(
-                f"No se encontró la metadata en: {METADATA_PATH}"
+                f"No se encontró la metadata en: {settings.metadata_path}"
             )
 
-        self.model = joblib.load(MODEL_PATH)
+        self.model = joblib.load(settings.model_path)
 
-        with open(METADATA_PATH, "r", encoding="utf-8") as file:
+        with open(settings.metadata_path, "r", encoding="utf-8") as file:
             self.metadata = json.load(file)
 
         self.features = self.metadata["features"]
@@ -40,9 +36,7 @@ class Predictor:
 
         prediction = int(self.model.predict(dataframe)[0])
 
-        probability = float(
-            self.model.predict_proba(dataframe)[0][1]
-        )
+        probability = float(self.model.predict_proba(dataframe)[0][1])
 
         return {
             "prediction": prediction,

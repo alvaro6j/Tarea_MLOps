@@ -49,26 +49,19 @@ FEATURE_COLUMNS = [
 ]
 
 # Duplicados considerando features + target
-duplicates = df.duplicated(
-    subset=FEATURE_COLUMNS + [TARGET]
-).sum()
+duplicates = df.duplicated(subset=FEATURE_COLUMNS + [TARGET]).sum()
 
 print("\nDuplicados en features + target:")
 print(duplicates)
 
 # Duplicados considerando solamente las features
-duplicates_features = df.duplicated(
-    subset=FEATURE_COLUMNS
-).sum()
+duplicates_features = df.duplicated(subset=FEATURE_COLUMNS).sum()
 
 print("\nDuplicados considerando solamente las features:")
 print(duplicates_features)
 
 # Casos donde las mismas features tienen distintos targets
-target_variation = (
-    df.groupby(FEATURE_COLUMNS)[TARGET]
-    .nunique()
-)
+target_variation = df.groupby(FEATURE_COLUMNS)[TARGET].nunique()
 
 conflicting_rows = (target_variation > 1).sum()
 
@@ -80,9 +73,7 @@ print("FRECUENCIA DE COMBINACIONES DE FEATURES")
 print("=" * 60)
 
 feature_counts = (
-    df.groupby(FEATURE_COLUMNS, dropna=False)
-    .size()
-    .sort_values(ascending=False)
+    df.groupby(FEATURE_COLUMNS, dropna=False).size().sort_values(ascending=False)
 )
 
 print("\nCantidad de combinaciones únicas:")
@@ -95,18 +86,11 @@ print("\n" + "=" * 60)
 print("DISTRIBUCIÓN DE FRECUENCIA DE LAS COMBINACIONES")
 print("=" * 60)
 
-feature_counts = (
-    df.groupby(FEATURE_COLUMNS, dropna=False)
-    .size()
-)
+feature_counts = df.groupby(FEATURE_COLUMNS, dropna=False).size()
 
 print(f"\nCombinaciones únicas: {len(feature_counts)}")
 print(f"Filas totales: {len(df)}")
 
 print("\nFrecuencia de las combinaciones:")
 
-print(
-    feature_counts
-    .value_counts()
-    .sort_index()
-)
+print(feature_counts.value_counts().sort_index())

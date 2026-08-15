@@ -6,6 +6,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 METADATA_PATH = BASE_DIR / "models" / "metadata.json"
 
+
 def validate_metrics(
     metrics: dict,
     min_f1: float,
@@ -14,22 +15,16 @@ def validate_metrics(
     failures = []
 
     if metrics["f1"] < min_f1:
-        failures.append(
-            f"F1 {metrics['f1']:.4f} < mínimo {min_f1:.4f}"
-        )
+        failures.append(f"F1 {metrics['f1']:.4f} < mínimo {min_f1:.4f}")
 
     if metrics["roc_auc"] < min_roc_auc:
-        failures.append(
-            "ROC-AUC "
-            f"{metrics['roc_auc']:.4f} < mínimo {min_roc_auc:.4f}"
-        )
+        failures.append(f"ROC-AUC {metrics['roc_auc']:.4f} < mínimo {min_roc_auc:.4f}")
 
     return failures
 
+
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Valida las métricas del modelo."
-    )
+    parser = argparse.ArgumentParser(description="Valida las métricas del modelo.")
     parser.add_argument(
         "--min-f1",
         type=float,
@@ -47,18 +42,12 @@ def main() -> int:
         print(f"ERROR: no se encontró {METADATA_PATH}")
         return 2
 
-    metadata = json.loads(
-        METADATA_PATH.read_text(encoding="utf-8")
-    )
+    metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
     metrics = metadata["metrics"]
 
     print("=== Quality Gate del Modelo ===")
     print(f"F1:      {metrics['f1']:.4f} (mínimo {args.min_f1:.4f})")
-    print(
-        "ROC-AUC: "
-        f"{metrics['roc_auc']:.4f} "
-        f"(mínimo {args.min_roc_auc:.4f})"
-    )
+    print(f"ROC-AUC: {metrics['roc_auc']:.4f} (mínimo {args.min_roc_auc:.4f})")
 
     failures = validate_metrics(
         metrics=metrics,
@@ -74,6 +63,7 @@ def main() -> int:
 
     print("\nGATE APROBADO: el modelo cumple los umbrales.")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

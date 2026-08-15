@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
+from app.config import settings
 from app.predictor import Predictor
 from app.schemas import (
     BatchPredictionRequest,
@@ -11,11 +12,10 @@ from app.schemas import (
 )
 
 app = FastAPI(
-    title="Default Prediction API",
-    description="API para predicción de riesgo de Default de clientes.",
-    version="1.0.0",
+    title=settings.api_title,
+    description=settings.api_description,
+    version=settings.api_version,
 )
-
 
 # El modelo se carga una sola vez cuando inicia la aplicación.
 predictor = Predictor()
@@ -34,9 +34,7 @@ def health():
 def predict(request: PredictionRequest):
     """Realiza una predicción para un cliente."""
     try:
-        return predictor.predict(
-            request.model_dump()
-        )
+        return predictor.predict(request.model_dump())
     except ValueError as exc:
         raise HTTPException(
             status_code=422,
@@ -51,10 +49,7 @@ def predict(request: PredictionRequest):
 def predict_batch(request: BatchPredictionRequest):
     """Realiza predicciones para múltiples clientes."""
     try:
-        instances = [
-            instance.model_dump()
-            for instance in request.instances
-        ]
+        instances = [instance.model_dump() for instance in request.instances]
 
         predictions = predictor.predict_batch(instances)
 
