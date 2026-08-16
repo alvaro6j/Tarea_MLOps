@@ -124,3 +124,78 @@ def test_batch_rejects_invalid_instance():
     )
 
     assert response.status_code == 422
+
+
+def test_predict_accepts_minimum_age():
+    payload = deepcopy(VALID_PAYLOAD)
+    payload["Edad"] = 18
+
+    response = client.post(
+        "/predict",
+        json=payload,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["prediction"] in [0, 1]
+    assert 0 <= body["probability"] <= 1
+
+
+def test_predict_accepts_maximum_age():
+    payload = deepcopy(VALID_PAYLOAD)
+    payload["Edad"] = 100
+
+    response = client.post(
+        "/predict",
+        json=payload,
+    )
+
+    assert response.status_code == 200
+
+
+def test_predict_rejects_age_above_maximum():
+    payload = deepcopy(VALID_PAYLOAD)
+    payload["Edad"] = 101
+
+    response = client.post(
+        "/predict",
+        json=payload,
+    )
+
+    assert response.status_code == 422
+
+
+def test_predict_accepts_zero_income():
+    payload = deepcopy(VALID_PAYLOAD)
+    payload["Ingresos"] = 0
+
+    response = client.post(
+        "/predict",
+        json=payload,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["prediction"] in [0, 1]
+    assert 0 <= body["probability"] <= 1
+
+
+def test_predict_accepts_zero_credit_debt():
+    payload = deepcopy(VALID_PAYLOAD)
+    payload["Deuda_Credito"] = 0
+
+    response = client.post(
+        "/predict",
+        json=payload,
+    )
+
+    assert response.status_code == 200
+
+    body = response.json()
+
+    assert body["prediction"] in [0, 1]
+    assert 0 <= body["probability"] <= 1
