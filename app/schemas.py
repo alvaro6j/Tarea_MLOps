@@ -26,6 +26,7 @@ class BatchPredictionResponse(BaseModel):
 
 class ModelSchemaResponse(BaseModel):
     features: list[str]
+    feature_types: dict[str, str]
     numeric_features: list[str]
     categorical_features: list[str]
 

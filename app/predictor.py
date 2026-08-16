@@ -66,6 +66,7 @@ class Predictor:
     def get_schema(self) -> dict:
         return {
             "features": self.metadata["features"],
+            "feature_types": self.metadata["feature_types"],
             "numeric_features": self.metadata["numeric_features"],
             "categorical_features": self.metadata["categorical_features"],
         }

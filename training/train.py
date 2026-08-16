@@ -87,6 +87,16 @@ CATEGORICAL_FEATURES = [
     "Nivel_Educacional",
 ]
 
+FEATURE_TYPES = {
+    "Edad": "integer",
+    "Nivel_Educacional": "string",
+    "Años_Trabajando": "integer",
+    "Ingresos": "integer",
+    "Deuda_Comercial": "number",
+    "Deuda_Credito": "number",
+    "Otras_Deudas": "number",
+}
+
 numeric_pipeline = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy="median")),
@@ -159,6 +169,7 @@ metadata = {
     "random_seed": RANDOM_SEED,
     "test_size": TEST_SIZE,
     "features": list(X.columns),
+    "feature_types": FEATURE_TYPES,
     "numeric_features": NUMERIC_FEATURES,
     "categorical_features": CATEGORICAL_FEATURES,
     "metrics": {
