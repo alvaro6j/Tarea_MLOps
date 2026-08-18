@@ -566,3 +566,11 @@ El informe final del proyecto se encuentra disponible en:
 ```text
 Informe_Proyecto_MLOps.pdf
 ```
+
+Nota: Durante el desarrollo del proyecto se utilizaron asistentes de Inteligencia Artificial como herramienta de apoyo al trabajo técnico y documental.
+
+ChatGPT: utilizado como apoyo para resolver dudas sobre Python, FastAPI, Docker, Git/GitHub, GitHub Actions y pruebas automatizadas. Fue útil para guiarnos en revisar errores de ejecución; orientar la implementación de casos borde y apoyar la revisión y redacción de la documentación del proyecto.
+
+Visual Studio Code y herramientas de desarrollo: utilizadas para implementar, revisar y ejecutar el código del proyecto.
+
+La IA se utilizó como herramienta de apoyo y consulta, adicionalmente del material visto en clases, principalmente "MLOps_Pipeline_CICD_Documentacion". Las decisiones de implementación, integración, ejecución de pruebas, validación del sistema y revisión final de los resultados fueron realizadas por el equipo.
